@@ -1,0 +1,22 @@
+<ng-container *ngIf="pokemonsData">
+    <div class="card-container">
+        <div *ngFor="let pokemon of pokemonsData">
+            <a class="card" (click)='showPokemonDetails(pokemon)'>
+                <img class="card-img-top" [src]="pokemon?.img" [alt]="pokemon?.name + 'image'">
+                <div class="card-body">
+                    <h3 class="card-title" [innerHTML]="pokemon?.name"></h3>
+                    <hr>
+                    <p class="card-text" [innerHTML]="'Weight: ' + pokemon?.weight"></p>
+                    <p class="card-text" [innerHTML]="'Height: ' + pokemon?.height"></p>
+                    <h5 class="card-title-ablities" [innerHTML]="'Abilities'"></h5>
+                    <hr>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" *ngFor="let ability of pokemon?.ablities"
+                            [innerHTML]="ability?.ability?.name">
+                        </li>
+                    </ul>
+                </div>
+            </a>
+        </div>
+    </div>
+</ng-container>

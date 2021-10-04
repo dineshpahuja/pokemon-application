@@ -1,0 +1,49 @@
+<ng-container *ngIf="!loading && pokemonsData">
+
+    <section class="pokemon-top-navigation-buttons">
+        <div class="footer ml-1">
+            <div class="row">
+                <div class="col-md-12 mt-1 mb-1">
+                    <label for="pokemonCount">Pokemon per page:</label>
+                    <select id="pokemonCount" class="custom-select" style="width: auto" [(ngModel)]="pockemonPerPage" (change)="getPaginatedPockemonData($event);">
+                    <option [ngValue]="10">10</option>
+                    <option [ngValue]="20">20</option>
+                    <option [ngValue]="50">50</option>
+                    </select>
+
+                    <label for="pokemonSortBy">SortBy: </label>
+                    <select id="pokemonSortBy" class="custom-select" style="width: auto" [(ngModel)]="pokemonDataSortBy"
+                        (change)="getSortedPockemonData($event);">
+                        <option [ngValue]="" selected></option>
+                        <option [ngValue]="name">Name</option>
+                        <option [ngValue]="height">Height</option>
+                        <option [ngValue]="weight">Weight</option>
+                    </select>
+                </div>
+                <div class="col-md-12 mt-1 mb-1">
+                    <button type="button" class="btn btn-primary float-right ml-2" (click)='nextPage()'>Next</button>
+                    <button type="button" class="btn btn-primary float-right" (click)='previousPage()'>Previous</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pokemon-cards">
+        <app-pokemon [pokemonsData]="pokemonsData?.results"></app-pokemon>
+    </section>
+
+    <section class="pokemon-bottom-navigation-buttons">
+        <div class="footer ml-1">
+            <div class="row">
+                <div class="col-md-12 mt-1 mb-1">
+                    <button type="button" class="btn btn-primary float-right ml-2" (click)='nextPage()'>Next</button>
+                    <button type="button" class="btn btn-primary float-right" (click)='previousPage()'>Previous</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</ng-container>
+
+<ngx-spinner *ngIf="loading" bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+    <p style="color: white">Loading... Please Wait. </p>
+</ngx-spinner>
